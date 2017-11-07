@@ -14,7 +14,11 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("BMI")
+                    .setMessage("BMI原來的設計是一個用於公眾健康研究的統計工具。當需要知道肥胖是否為某一疾病的致病原因時，可以把病人的身高及體重換算成BMI，再找出其數值及病發率是否有線性關連。")
+                    .setPositiveButton("OK" , null)
+                    .show();
         }
     };
     @Override
