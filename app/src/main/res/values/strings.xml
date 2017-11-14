@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Bmi</string>
     <string name="your_bmi_is">Your BMI is </string>
-    <string name="bmi_title">my title</string>
+    <string name="bmi_title">結果</string>
     <string name="ok">OK</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
