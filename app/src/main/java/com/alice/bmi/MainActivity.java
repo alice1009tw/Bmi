@@ -36,9 +36,16 @@ public class MainActivity extends AppCompatActivity {
         Log.w("MainActivity", "testing bmi method");
         EditText edWeight = (EditText) findViewById(R.id.ed_weight);
         EditText edheight = (EditText) findViewById(R.id.ed_height);
+        int height = Integer.parseInt(edheight.getText().toString()) ;
+        if(height>3){
+            new AlertDialog.Builder(this)
+                    .setMessage("身高單位應為公尺")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
         float weight = Float.parseFloat(edWeight.getText().toString());
-        float height = Float.parseFloat(edheight.getText().toString());
-        float bmi = weight / (height * height);
+        float height1 = Float.parseFloat(edheight.getText().toString());
+        float bmi = weight / (height1 * height1);
         Log.d("MainActivity", "Your BMI is:" + bmi);
         if(bmi<20){
             new AlertDialog.Builder(this)
