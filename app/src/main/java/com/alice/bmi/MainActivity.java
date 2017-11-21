@@ -1,5 +1,6 @@
 package com.alice.bmi;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,17 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
     };
+    private EditText edWeight;
+    private EditText edHeight;
+    private Button bHelp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button bHelp = (Button) findViewById(R.id.b_help);
+        findViews();
         bHelp.setOnClickListener(listener);
+
 //        getResources().getString(R.string.app_name);
     }
     public void bmi(View view){
@@ -34,18 +40,22 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "testing bmi method");
         Log.e("MainActivity", "testing bmi method");
         Log.w("MainActivity", "testing bmi method");
-        EditText edWeight = (EditText) findViewById(R.id.ed_weight);
-        EditText edheight = (EditText) findViewById(R.id.ed_height);
-        int height = Integer.parseInt(edheight.getText().toString()) ;
+
+        float weight = Float.parseFloat(edWeight.getText().toString());
+        float height = Float.parseFloat(edHeight.getText().toString());
+        float bmi = weight / (height * height);
+
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(getString(R.string.bmi_extra), bmi);
+        startActivity(intent);
+
         if(height>3){
             new AlertDialog.Builder(this)
                     .setMessage("身高單位應為公尺")
                     .setPositiveButton("OK", null)
                     .show();
         }
-        float weight = Float.parseFloat(edWeight.getText().toString());
-        float height1 = Float.parseFloat(edheight.getText().toString());
-        float bmi = weight / (height1 * height1);
+
         Log.d("MainActivity", "Your BMI is:" + bmi);
         if(bmi<20){
             new AlertDialog.Builder(this)
@@ -55,9 +65,46 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
 
-       /*Toast.makeText(this,
+    }
+
+    public void findViews() {
+        edWeight = (EditText) findViewById(R.id.ed_weight);
+        edHeight = (EditText) findViewById(R.id.ed_height);
+        Button bHelp = (Button) findViewById(R.id.b_help);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("MainActivity", "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity", "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("MainActivity", "onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("MainActivity", "onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MainActivity", "onResumet");
+    }
+/*Toast.makeText(this,
                 "Your BMI is " + bmi,
                 Toast.LENGTH_SHORT)   //回傳Toast
                 .show();*/
-    }
+
 }
